@@ -36,3 +36,7 @@
 
 # 1-M
 [좋은 단어](https://www.acmicpc.net/problem/3986)
+
+# 1-N
+[곱셈](https://www.acmicpc.net/problem/1629)
+
