@@ -1,12 +1,7 @@
 #include <iostream>
 
 using namespace std;
-// 1,1 1,2 1,3 2,1 2,3
-// 0 0 0 0 0
-// 0 1 1 1 0
-// 0 1 0 1 0
-// 0 0 0 0 0
-// 0 0 0 0 0
+
 int map[50][50];
 int visited[50][50];
 int T, M, N, K;
@@ -14,7 +9,11 @@ int dx[4] = {0, 1, 0, -1};
 int dy[4] = {1, 0, -1, 0};
 int cnt;
 string ret;
-
+// 0 0 0 0 1
+// 0 0 0 0 0
+// 0 0 0 1 0
+//
+//
 void dfs(int x, int y) {
     visited[x][y] = cnt;
 
@@ -32,6 +31,8 @@ int main() {
     cin >> T;
     for(int t = 0; t < T; t++) {
         cin >> M >> N >> K;
+        fill(&map[0][0], &map[0][0] + 51 * 51, 0);
+        fill(&visited[0][0], &visited[0][0] + 51 * 51, 0);
         for(int k = 0; k < K; k++){
             int m, n;
             cin >> m >> n;
@@ -45,8 +46,7 @@ int main() {
                 dfs(i, j);
             }
         }
-        ret += '0' + cnt;
-        ret += "\n";
+        ret += to_string(cnt) + "\n";
     }
     cout << ret;
     return 0;
