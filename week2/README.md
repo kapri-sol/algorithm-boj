@@ -9,3 +9,9 @@
 
 # 2-D
 [영역 구하기](https://www.acmicpc.net/problem/2583)
+
+# 2-E
+[쿼드트리](https://www.acmicpc.net/problem/1992)
+
+# 2-F
+[사과 담기 게임](https://www.acmicpc.net/problem/2828)
