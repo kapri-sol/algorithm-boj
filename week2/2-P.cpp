@@ -1,5 +1,4 @@
 #include <iostream>
-#include <string>
 #include <vector>
 
 using namespace std;
@@ -45,9 +44,9 @@ int main() {
                 map[walls[j].first][walls[j].second] = 1;
                 map[walls[k].first][walls[k].second] = 1;
 
-                for(int n = 0; n < N; n++) {
-                    if(visited[virus[n].first][virus[n].second]) continue;
-                    dfs(virus[n].first,virus[n].second);
+                for(int i = 0; i < virus.size(); i++) {
+                    if(visited[virus[i].first][virus[i].second]) continue;
+                    dfs(virus[i].first, virus[i].second);
                 }
 
                 int cnt = 0;
@@ -57,17 +56,6 @@ int main() {
                     }
                 }
                 maxCnt = max(maxCnt, cnt);
-
-//                if(maxCnt == 5) {
-//                    cout <<"\n";
-//                    for(int n = 0; n < N; n++) {
-//                        for(int m = 0; m < M; m++) {
-//                            cout << visited[n][m] << " ";
-//                        }
-//                        cout <<"\n";
-//                    }
-//                }
-
 
                 for(int n = 0; n < N; n++) {
                     for(int m = 0; m < M; m++) {
@@ -82,6 +70,6 @@ int main() {
         }
     }
 
-    cout << maxCnt;
+    cout << maxCnt << "\n";
     return 0;
 }
