@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string.h>
 
 using namespace std;
 
@@ -11,15 +12,13 @@ int dp[10001];
 int maxCnt;
 
 int search(int start) {
-    if(visited[start]) return dp[start];
     visited[start] = 1;
 
-    int cnt = 0;
+    int cnt = 1;
     for(int i = 0; i < trust[start].size(); i++) {
-        cnt += 1 + search(trust[start][i]);
+        if(visited[trust[start][i]]) continue;
+        cnt += search(trust[start][i]);
     }
-    dp[start] = cnt;
-    maxCnt = max(cnt, maxCnt);
     return cnt;
 }
 
@@ -35,9 +34,10 @@ int main() {
     }
 
     for(int i = 1; i <= N; i++) {
-        if(trust[i].size()) search(i);
+        memset(visited, 0, sizeof(visited));
+        dp[i] = search(i);
+        maxCnt = max(dp[i], maxCnt);
     }
-
 
     for(int i = 1; i <= N; i++) {
         if(dp[i] == maxCnt) ret.push_back(i);
