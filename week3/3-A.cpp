@@ -4,11 +4,11 @@
 
 using namespace std;
 
-
 int N, M;
 int map[50][50];
 vector<pair<int, int> > chicken;
 vector<pair<int, int> > home;
+int minDist = 999999;
 
 int countDist(pair<int, int> a, pair<int, int> b) {
     int x = max(a.first, b.first) - min(a.first, b.first);
@@ -16,23 +16,25 @@ int countDist(pair<int, int> a, pair<int, int> b) {
     return x + y;
 }
 
-template <typename T>
-vector<vector<T> > comb(vector<T> v, int c) {
-    vector<int> num(v.size());
-    vector<vector<T> > ret;
-
-    for(int i = 0; i < c; i++) num[i] = 1;
-
-    do {
-        vector<T> t;
-
-        for(int i = 0; i < num.size(); i++) {
-            if(num[i] == 1) t.push_back(v[i]);
+void comb(int start, vector<pair<int, int> > v) {
+    if(v.size() == M) {
+        int totalChickenDist = 0;
+        for(int i = 0; i < home.size(); i++) {
+            int chickenDist = 999999;
+            for(int j = 0; j < v.size(); j++) {
+                chickenDist = min(chickenDist, countDist(home[i], v[j]));
+            }
+            totalChickenDist += chickenDist;
         }
-        ret.push_back(t);
-    } while (next_permutation(num.begin(), num.end()));
+        minDist = min(minDist, totalChickenDist);
+        return;
+    }
 
-    return ret;
+    for(int i = start + 1; i < chicken.size(); i++) {
+        v.push_back(chicken[i]);
+        comb(i, v);
+        v.pop_back();
+    }
 }
 
 int main() {
@@ -46,10 +48,8 @@ int main() {
         }
     }
 
-    vector<vector<pair<int, int> > > v = comb(chicken, M);
+    comb(-1, vector<pair<int, int> >());
 
-    for(int i = 0; i < v.size(); i++) {
-
-    }
+    cout << minDist;
     return 0;
 }
