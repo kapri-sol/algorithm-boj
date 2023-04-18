@@ -6,17 +6,14 @@ int N, K;
 const int MAX = 100000;
 int visited[MAX+4];
 long long cnt[MAX+4];
-int mn = 987654321;
-int totalCnt;
 
-queue<int> q;
-
-int bfs() {
+void bfs() {
+    queue<int> q;
     q.push(N);
     visited[N] = 1;
     cnt[N] = 1;
 
-    while(q.size()) {
+    while(!q.empty()) {
         int current = q.front();
         q.pop();
 
@@ -46,6 +43,6 @@ int main() {
         return 0;
     }
     bfs();
-    cout << visited[K] -1  << "\n" << cnt[K];
+    cout << visited[K] - 1  << "\n" << cnt[K];
     return 0;
 }
