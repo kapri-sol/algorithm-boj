@@ -1,20 +1,14 @@
-import java.util.*
-
 fun main() {
-    val scanner = Scanner(System.`in`)
+    val heights = List(9) { readln().toInt() }
+    val sum = heights.sum()
 
-    val dwarfs = Array(9) { scanner.nextLine().toInt() }.toList()
-    val sum = dwarfs.sum()
-    var result: List<Int>
-
-    for (i in 0..8) {
-        for ( j in 0 .. 8) {
-            if (i == j) continue
-            if (sum - (dwarfs[i] + dwarfs[j]) == 100) {
-                result = dwarfs
-                    .filterIndexed{ index, _ -> (index != i) && (index != j) }
+    for (i in 0 until 9) {
+        for (j in i + 1 until 9) {
+            if ((sum - heights[i] - heights[j]) == 100) {
+                heights
+                    .filterIndexed { idx, _ -> idx != i && idx != j }
                     .sorted()
-                result.forEach { println(it) }
+                    .forEach { println(it) }
                 return
             }
         }
